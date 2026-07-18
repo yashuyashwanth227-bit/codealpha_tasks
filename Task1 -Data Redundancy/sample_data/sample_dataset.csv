@@ -1,0 +1,21 @@
+full_name,email,phone,city
+John Doe,john.doe@nimbuscloud.io,+91 98765 43210,Chennai
+Jane Smith,jane.smith@nimbuscloud.io,+91 91234 56789,Mumbai
+John Doe,john.doe@nimbuscloud.io,+91 98765 43210,Chennai
+Jon Doe,john.doe@nimbuscloud.io,+91 98765 43211,Chennai
+Arjun Mehta,arjun.mehta@nimbuscloud.io,+91 99887 76655,Bengaluru
+Priya Verma,priya.verma@nimbuscloud.io,+91 90011 22334,Delhi
+Priya  Verma ,priya.verma@nimbuscloud.io,+91 90011 22334,Delhi
+Rahul Nair,rahul.nair@nimbuscloud.io,+91 93456 78901,Kochi
+Sara Khan,sara.khan@nimbuscloud.io,+91 97654 32109,Hyderabad
+Sara Khann,sara.khan@nimbuscloud.io,+91 97654 32108,Hyderabad
+Wei Zhang,wei.zhang@nimbuscloud.io,+86 138 0013 8000,Shanghai
+Amara Okafor,amara.okafor@nimbuscloud.io,+234 803 123 4567,Lagos
+Diego Ramirez,diego.ramirez@nimbuscloud.io,+52 55 1234 5678,Mexico City
+Diego Ramirez,diego.ramirez@nimbuscloud.io,+52 55 1234 5678,Mexico City
+Fatima Ali,fatima.ali@nimbuscloud.io,+92 300 1234567,Karachi
+Liam O'Brien,liam.obrien@nimbuscloud.io,+353 87 123 4567,Dublin
+Emma Wilson,emma.wilson@nimbuscloud.io,+44 7911 123456,London
+Emma Willson,emma.wilson@nimbuscloud.io,+44 7911 123457,London
+Noah Garcia,noah.garcia@nimbuscloud.io,+1 415 555 0132,San Francisco
+Sofia Rossi,sofia.rossi@nimbuscloud.io,+39 320 123 4567,Milan

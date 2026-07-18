@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+nimbuscloud.db
+*.db
+.vscode/
+.idea/
+.DS_Store
+*.log

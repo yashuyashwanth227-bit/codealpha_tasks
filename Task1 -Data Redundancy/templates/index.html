@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NimbusCloud | Data Redundancy Removal System</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ===================================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                NC
+            </div>
+
+            <div class="logo-text">
+
+                <h2>NimbusCloud</h2>
+
+                <span>Data Redundancy System</span>
+
+            </div>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <button class="nav-item active" data-page="dashboard">
+
+                <span class="nav-icon">📊</span>
+
+                <span>Dashboard</span>
+
+            </button>
+
+            <button class="nav-item" data-page="upload">
+
+                <span class="nav-icon">📂</span>
+
+                <span>Upload Data</span>
+
+            </button>
+
+            <button class="nav-item" data-page="records">
+
+                <span class="nav-icon">📁</span>
+
+                <span>Records</span>
+
+            </button>
+
+            <button class="nav-item" data-page="review">
+
+                <span class="nav-icon">🛡️</span>
+
+                <span>Review Queue</span>
+
+                <span id="reviewCount" class="badge">
+                    0
+                </span>
+
+            </button>
+
+            <button class="nav-item" data-page="activity">
+
+                <span class="nav-icon">📜</span>
+
+                <span>Activity</span>
+
+            </button>
+
+            <button class="nav-item" data-page="settings">
+
+                <span class="nav-icon">⚙️</span>
+
+                <span>Settings</span>
+
+            </button>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <span>System Online</span>
+
+            </div>
+
+            <p>
+                NimbusCloud v1.0
+            </p>
+
+        </div>
+
+    </aside>
+
+    <!-- ===================================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ===================================================== -->
+
+    <main class="main-content">
+
+        <!-- ============================ -->
+        <!-- TOP HEADER -->
+        <!-- ============================ -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1 id="pageTitle">
+
+                    Dashboard
+
+                </h1>
+
+                <p id="pageDescription">
+
+                    Real-time monitoring of redundancy validation
+
+                </p>
+
+            </div>
+
+            <div class="topbar-actions">
+
+                <button id="themeToggle" class="icon-button">
+
+                    🌙
+
+                </button>
+
+                <button class="icon-button">
+
+                    🔔
+
+                </button>
+
+                <div class="user-profile">
+
+                    <div class="avatar">
+
+                        NC
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- ===================================================== -->
+        <!-- DASHBOARD -->
+        <!-- ===================================================== -->
+
+        <section id="dashboardPage" class="page active">
+
+            <!-- ================================= -->
+            <!-- KPI CARDS -->
+            <!-- ================================= -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+
+                        Total Records
+
+                    </div>
+
+                    <div id="totalRecords" class="stat-value">
+
+                        0
+
+                    </div>
+
+                    <div class="stat-footer">
+
+                        Cloud Database
+
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+
+                        Duplicates Blocked
+
+                    </div>
+
+                    <div id="duplicateRecords" class="stat-value">
+
+                        0
+
+                    </div>
+
+                    <div class="stat-footer">
+
+                        Exact Match
+
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+
+                        Pending Review
+
+                    </div>
+
+                    <div id="pendingRecords" class="stat-value">
+
+                        0
+
+                    </div>
+
+                    <div class="stat-footer">
+
+                        Human Review
+
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+
+                        False Positives
+
+                    </div>
+
+                    <div id="falsePositiveRecords" class="stat-value">
+
+                        0
+
+                    </div>
+
+                    <div class="stat-footer">
+
+                        Restored
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================================= -->
+            <!-- CHARTS -->
+            <!-- ================================= -->
+
+            <div class="dashboard-grid">
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+
+                            Daily Upload Activity
+
+                        </h3>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <canvas id="activityChart"></canvas>
+
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+
+                            Classification Breakdown
+
+                        </h3>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <canvas id="statusChart"></canvas>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================================= -->
+            <!-- RECENT ACTIVITY -->
+            <!-- ================================= -->
+
+            <div class="dashboard-grid">
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+
+                            Recent Activity
+
+                        </h3>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div id="recentActivity">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+
+                            System Summary
+
+                        </h3>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="summary-item">
+
+                            <span>
+
+                                Validation Engine
+
+                            </span>
+
+                            <strong>
+
+                                Active
+
+                            </strong>
+
+                        </div>
+
+                        <div class="summary-item">
+
+                            <span>
+
+                                Decision Engine
+
+                            </span>
+
+                            <strong>
+
+                                Running
+
+                            </strong>
+
+                        </div>
+
+                        <div class="summary-item">
+
+                            <span>
+
+                                Database
+
+                            </span>
+
+                            <strong>
+
+                                Connected
+
+                            </strong>
+
+                        </div>
+
+                        <div class="summary-item">
+
+                            <span>
+
+                                Similarity Threshold
+
+                            </span>
+
+                            <strong id="currentThreshold">
+
+                                85%
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+                <!-- ===================================================== -->
+        <!-- UPLOAD PAGE -->
+        <!-- ===================================================== -->
+
+        <section id="uploadPage" class="page">
+
+            <div class="page-header">
+
+                <div>
+
+                    <h2>Upload Dataset</h2>
+
+                    <p>
+                        Upload a CSV file or manually insert a new record into
+                        the cloud database.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="upload-layout">
+
+                <!-- ============================= -->
+                <!-- CSV Upload -->
+                <!-- ============================= -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>CSV Upload</h3>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div id="uploadDropZone" class="upload-zone">
+
+                            <div class="upload-icon">
+
+                                ☁️
+
+                            </div>
+
+                            <h3>
+
+                                Drag & Drop CSV File
+
+                            </h3>
+
+                            <p>
+
+                                or click below to browse
+
+                            </p>
+
+                            <input
+                                type="file"
+                                id="csvFile"
+                                accept=".csv"
+                                hidden>
+
+                            <button
+                                id="browseCSV"
+                                class="primary-btn">
+
+                                Browse CSV
+
+                            </button>
+
+                        </div>
+
+                        <div id="uploadPreview" class="upload-preview"></div>
+
+                        <div class="upload-actions">
+
+                            <button
+                                id="uploadDataset"
+                                class="primary-btn">
+
+                                Upload Dataset
+
+                            </button>
+
+                            <button
+                                id="downloadSample"
+                                class="secondary-btn">
+
+                                Download Sample CSV
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ============================= -->
+                <!-- Manual Entry -->
+                <!-- ============================= -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+
+                            Manual Record Entry
+
+                        </h3>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <form id="manualRecordForm">
+
+                            <div
+                                id="manualFields"
+                                class="dynamic-fields">
+
+                            </div>
+
+                            <div class="form-actions">
+
+                                <button
+                                    type="button"
+                                    id="addFieldButton"
+                                    class="secondary-btn">
+
+                                    + Add Field
+
+                                </button>
+
+                                <button
+                                    type="submit"
+                                    class="primary-btn">
+
+                                    Submit Record
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- RECORDS PAGE -->
+        <!-- ===================================================== -->
+
+        <section id="recordsPage" class="page">
+
+            <div class="page-header">
+
+                <div>
+
+                    <h2>
+
+                        Records Database
+
+                    </h2>
+
+                    <p>
+
+                        Browse all processed records.
+
+                    </p>
+
+                </div>
+
+                <div class="page-actions">
+
+                    <button
+                        id="exportCSV"
+                        class="secondary-btn">
+
+                        Export CSV
+
+                    </button>
+
+                    <button
+                        id="exportJSON"
+                        class="secondary-btn">
+
+                        Export JSON
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- =========================== -->
+            <!-- Search & Filters -->
+            <!-- =========================== -->
+
+            <div class="toolbar">
+
+                <input
+                    type="text"
+                    id="recordSearch"
+                    class="search-box"
+                    placeholder="Search records...">
+
+                <select id="recordFilter">
+
+                    <option value="all">
+
+                        All Records
+
+                    </option>
+
+                    <option value="unique">
+
+                        Unique
+
+                    </option>
+
+                    <option value="duplicate">
+
+                        Duplicate
+
+                    </option>
+
+                    <option value="pending_review">
+
+                        Pending Review
+
+                    </option>
+
+                    <option value="false_positive">
+
+                        False Positive
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- =========================== -->
+            <!-- Records Table -->
+            <!-- =========================== -->
+
+            <div class="card">
+
+                <div class="table-wrapper">
+
+                    <table
+                        id="recordsTable"
+                        class="data-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+
+                                    ID
+
+                                </th>
+
+                                <th>
+
+                                    Source
+
+                                </th>
+
+                                <th>
+
+                                    Record Data
+
+                                </th>
+
+                                <th>
+
+                                    Status
+
+                                </th>
+
+                                <th>
+
+                                    Similarity
+
+                                </th>
+
+                                <th>
+
+                                    Created
+
+                                </th>
+
+                                <th>
+
+                                    Action
+
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="recordsTableBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <!-- =========================== -->
+            <!-- Pagination -->
+            <!-- =========================== -->
+
+            <div class="pagination">
+
+                <button
+                    id="previousPage"
+                    class="secondary-btn">
+
+                    Previous
+
+                </button>
+
+                <span
+                    id="pageIndicator">
+
+                    Page 1
+
+                </span>
+
+                <button
+                    id="nextPage"
+                    class="secondary-btn">
+
+                    Next
+
+                </button>
+
+            </div>
+
+        </section>
+                <!-- ===================================================== -->
+        <!-- REVIEW QUEUE PAGE -->
+        <!-- ===================================================== -->
+
+        <section id="reviewPage" class="page">
+
+            <div class="page-header">
+
+                <div>
+
+                    <h2>
+
+                        Review Queue
+
+                    </h2>
+
+                    <p>
+
+                        Review possible duplicate records before they are
+                        permanently classified.
+
+                    </p>
+
+                </div>
+
+                <div class="page-actions">
+
+                    <span class="badge warning" id="reviewQueueCount">
+
+                        0 Pending
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="review-layout">
+
+                <!-- ============================= -->
+                <!-- Pending Records -->
+                <!-- ============================= -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+
+                            Pending Records
+
+                        </h3>
+
+                    </div>
+
+                    <div
+                        class="card-body review-list"
+                        id="reviewList">
+
+                    </div>
+
+                </div>
+
+                <!-- ============================= -->
+                <!-- Comparison -->
+                <!-- ============================= -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+
+                            Record Comparison
+
+                        </h3>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="comparison-container">
+
+                            <div class="compare-column">
+
+                                <h4>
+
+                                    Incoming Record
+
+                                </h4>
+
+                                <div
+                                    id="incomingRecord"
+                                    class="comparison-box">
+
+                                </div>
+
+                            </div>
+
+                            <div class="comparison-divider">
+
+                                ⇄
+
+                            </div>
+
+                            <div class="compare-column">
+
+                                <h4>
+
+                                    Existing Record
+
+                                </h4>
+
+                                <div
+                                    id="matchedRecord"
+                                    class="comparison-box">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="similarity-section">
+
+                            <label>
+
+                                Similarity Score
+
+                            </label>
+
+                            <div
+                                id="similarityValue"
+                                class="similarity-value">
+
+                                0%
+
+                            </div>
+
+                        </div>
+
+                        <div class="review-actions">
+
+                            <button
+                                id="confirmDuplicate"
+                                class="danger-btn">
+
+                                Confirm Duplicate
+
+                            </button>
+
+                            <button
+                                id="markFalsePositive"
+                                class="success-btn">
+
+                                Mark False Positive
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- ACTIVITY PAGE -->
+        <!-- ===================================================== -->
+
+        <section id="activityPage" class="page">
+
+            <div class="page-header">
+
+                <div>
+
+                    <h2>
+
+                        Activity Log
+
+                    </h2>
+
+                    <p>
+
+                        Complete history of every action performed in the
+                        system.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div
+                    class="activity-list"
+                    id="activityList">
+
+                </div>
+
+            </div>
+
+            <div class="pagination">
+
+                <button
+                    id="activityPrevious"
+                    class="secondary-btn">
+
+                    Previous
+
+                </button>
+
+                <span id="activityPageNumber">
+
+                    Page 1
+
+                </span>
+
+                <button
+                    id="activityNext"
+                    class="secondary-btn">
+
+                    Next
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SETTINGS PAGE -->
+        <!-- ===================================================== -->
+
+        <section id="settingsPage" class="page">
+
+            <div class="page-header">
+
+                <div>
+
+                    <h2>
+
+                        System Settings
+
+                    </h2>
+
+                    <p>
+
+                        Configure the redundancy detection engine.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="settings-grid">
+
+                <!-- =========================== -->
+                <!-- Validation Engine -->
+                <!-- =========================== -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+
+                            Validation Engine
+
+                        </h3>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <label>
+
+                            Similarity Threshold
+
+                        </label>
+
+                        <input
+                            id="thresholdSlider"
+                            type="range"
+                            min="50"
+                            max="100"
+                            value="85">
+
+                        <div class="slider-value">
+
+                            <span
+                                id="thresholdValue">
+
+                                85%
+
+                            </span>
+
+                        </div>
+
+                        <button
+                            id="saveSettings"
+                            class="primary-btn">
+
+                            Save Settings
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- =========================== -->
+                <!-- System Information -->
+                <!-- =========================== -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+
+                            System Information
+
+                        </h3>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="info-row">
+
+                            <span>
+
+                                Application
+
+                            </span>
+
+                            <strong>
+
+                                NimbusCloud
+
+                            </strong>
+
+                        </div>
+
+                        <div class="info-row">
+
+                            <span>
+
+                                Version
+
+                            </span>
+
+                            <strong>
+
+                                1.0
+
+                            </strong>
+
+                        </div>
+
+                        <div class="info-row">
+
+                            <span>
+
+                                Framework
+
+                            </span>
+
+                            <strong>
+
+                                Flask
+
+                            </strong>
+
+                        </div>
+
+                        <div class="info-row">
+
+                            <span>
+
+                                Database
+
+                            </span>
+
+                            <strong>
+
+                                SQLite
+
+                            </strong>
+
+                        </div>
+
+                        <div class="info-row">
+
+                            <span>
+
+                                Matching Engine
+
+                            </span>
+
+                            <strong>
+
+                                RapidFuzz
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- =========================== -->
+                <!-- Danger Zone -->
+                <!-- =========================== -->
+
+                <div class="card danger-card">
+
+                    <div class="card-header">
+
+                        <h3>
+
+                            Danger Zone
+
+                        </h3>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <p>
+
+                            This will permanently remove every record,
+                            activity log, review item and cannot be undone.
+
+                        </p>
+
+                        <button
+                            id="resetSystem"
+                            class="danger-btn">
+
+                            Reset Entire System
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+                <!-- ===================================================== -->
+        <!-- GLOBAL LOADING OVERLAY -->
+        <!-- ===================================================== -->
+
+        <div id="loadingOverlay" class="loading-overlay hidden">
+
+            <div class="loader-card">
+
+                <div class="loader-spinner"></div>
+
+                <h3>
+
+                    Processing...
+
+                </h3>
+
+                <p id="loadingMessage">
+
+                    Please wait while the system processes your request.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ===================================================== -->
+        <!-- GLOBAL MODAL -->
+        <!-- ===================================================== -->
+
+        <div id="modalOverlay" class="modal-overlay hidden">
+
+            <div class="modal-window">
+
+                <div class="modal-header">
+
+                    <h2 id="modalTitle">
+
+                        Record Details
+
+                    </h2>
+
+                    <button
+                        id="closeModal"
+                        class="modal-close">
+
+                        &times;
+
+                    </button>
+
+                </div>
+
+                <div
+                    id="modalBody"
+                    class="modal-body">
+
+                </div>
+
+                <div
+                    id="modalFooter"
+                    class="modal-footer">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ===================================================== -->
+        <!-- CONFIRMATION DIALOG -->
+        <!-- ===================================================== -->
+
+        <div id="confirmOverlay" class="modal-overlay hidden">
+
+            <div class="confirm-dialog">
+
+                <div class="confirm-icon">
+
+                    ⚠️
+
+                </div>
+
+                <h3 id="confirmTitle">
+
+                    Confirmation
+
+                </h3>
+
+                <p id="confirmMessage">
+
+                    Are you sure you want to continue?
+
+                </p>
+
+                <div class="confirm-actions">
+
+                    <button
+                        id="confirmCancel"
+                        class="secondary-btn">
+
+                        Cancel
+
+                    </button>
+
+                    <button
+                        id="confirmOk"
+                        class="danger-btn">
+
+                        Continue
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ===================================================== -->
+        <!-- TOAST CONTAINER -->
+        <!-- ===================================================== -->
+
+        <div
+            id="toastContainer"
+            class="toast-container">
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- THIRD PARTY LIBRARIES -->
+<!-- ===================================================== -->
+
+<!-- Vendor Libraries -->
+<script src="{{ url_for('static', filename='js/vendor/chart.umd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/papaparse.min.js') }}"></script>
+
+<!-- Core -->
+<script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+<script src="{{ url_for('static', filename='js/api.js') }}"></script>
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+
+<!-- Feature Modules -->
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+<script src="{{ url_for('static', filename='js/records.js') }}"></script>
+<script src="{{ url_for('static', filename='js/review.js') }}"></script>
+<script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+
+<!-- Application Bootstrap (Always Last) -->
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+
+</html>

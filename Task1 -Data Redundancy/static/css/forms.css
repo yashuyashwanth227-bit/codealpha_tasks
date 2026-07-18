@@ -1,0 +1,671 @@
+/* ==========================================================
+   NimbusCloud
+   Forms Module
+========================================================== */
+
+/* ==========================================================
+   FORM LAYOUT
+========================================================== */
+
+.form-container{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+}
+
+.form-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:24px;
+}
+
+.form-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:24px;
+}
+
+.form-title{
+    font-size:1.2rem;
+    font-weight:700;
+    color:var(--text);
+}
+
+.form-subtitle{
+    margin-top:6px;
+    color:var(--text-light);
+    font-size:.9rem;
+}
+
+/* ==========================================================
+   FORM GRID
+========================================================== */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.form-grid-3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.form-grid-4{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.form-group.full-width{
+    grid-column:1/-1;
+}
+
+/* ==========================================================
+   LABELS
+========================================================== */
+
+.form-label{
+    font-size:.9rem;
+    font-weight:600;
+    color:var(--text);
+}
+
+.required::after{
+    content:" *";
+    color:#ef4444;
+}
+
+/* ==========================================================
+   INPUTS
+========================================================== */
+
+.form-control,
+.form-select,
+.form-textarea{
+
+    width:100%;
+
+    padding:12px 16px;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    background:var(--surface);
+
+    color:var(--text);
+
+    font-size:.95rem;
+
+    transition:
+        border-color .25s,
+        box-shadow .25s;
+}
+
+.form-control:focus,
+.form-select:focus,
+.form-textarea:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.12);
+
+}
+
+.form-textarea{
+
+    resize:vertical;
+
+    min-height:140px;
+
+}
+
+.form-control::placeholder,
+.form-textarea::placeholder{
+
+    color:var(--text-light);
+
+}
+/* ==========================================================
+   NimbusCloud
+   Forms Module
+========================================================== */
+
+/* ==========================================================
+   FORM LAYOUT
+========================================================== */
+
+.form-container{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+}
+
+.form-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:24px;
+}
+
+.form-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:24px;
+}
+
+.form-title{
+    font-size:1.2rem;
+    font-weight:700;
+    color:var(--text);
+}
+
+.form-subtitle{
+    margin-top:6px;
+    color:var(--text-light);
+    font-size:.9rem;
+}
+
+/* ==========================================================
+   FORM GRID
+========================================================== */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.form-grid-3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.form-grid-4{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.form-group.full-width{
+    grid-column:1/-1;
+}
+
+/* ==========================================================
+   LABELS
+========================================================== */
+
+.form-label{
+    font-size:.9rem;
+    font-weight:600;
+    color:var(--text);
+}
+
+.required::after{
+    content:" *";
+    color:#ef4444;
+}
+
+/* ==========================================================
+   INPUTS
+========================================================== */
+
+.form-control,
+.form-select,
+.form-textarea{
+
+    width:100%;
+
+    padding:12px 16px;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    background:var(--surface);
+
+    color:var(--text);
+
+    font-size:.95rem;
+
+    transition:
+        border-color .25s,
+        box-shadow .25s;
+}
+
+.form-control:focus,
+.form-select:focus,
+.form-textarea:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.12);
+
+}
+
+.form-textarea{
+
+    resize:vertical;
+
+    min-height:140px;
+
+}
+
+.form-control::placeholder,
+.form-textarea::placeholder{
+
+    color:var(--text-light);
+
+}
+/* ==========================================================
+   BUTTON GROUPS
+========================================================== */
+
+.form-actions{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:16px;
+    margin-top:28px;
+    flex-wrap:wrap;
+}
+
+.form-actions-left{
+    display:flex;
+    gap:12px;
+    margin-right:auto;
+}
+
+.form-actions-right{
+    display:flex;
+    gap:12px;
+}
+
+/* ==========================================================
+   FILE UPLOAD
+========================================================== */
+
+.file-upload{
+    position:relative;
+    width:100%;
+}
+
+.file-upload input[type="file"]{
+    display:none;
+}
+
+.file-upload-label{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    gap:14px;
+
+    min-height:220px;
+
+    padding:36px;
+
+    border:2px dashed var(--border);
+    border-radius:18px;
+
+    background:var(--surface-light);
+
+    cursor:pointer;
+
+    transition:
+        border-color .25s,
+        background .25s,
+        transform .25s;
+}
+
+.file-upload-label:hover{
+    border-color:var(--primary);
+    background:rgba(37,99,235,.05);
+}
+
+.file-upload-label.dragover{
+    border-color:var(--primary);
+    background:rgba(37,99,235,.10);
+    transform:scale(1.01);
+}
+
+.file-upload-icon{
+    font-size:56px;
+    color:var(--primary);
+}
+
+.file-upload-title{
+    font-size:1.1rem;
+    font-weight:600;
+    color:var(--text);
+}
+
+.file-upload-description{
+    color:var(--text-light);
+    text-align:center;
+    max-width:420px;
+    line-height:1.6;
+}
+
+/* ==========================================================
+   FILE PREVIEW
+========================================================== */
+
+.file-preview-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:20px;
+}
+
+.file-preview-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:14px 18px;
+
+    border:1px solid var(--border);
+    border-radius:12px;
+
+    background:var(--surface);
+}
+
+.file-preview-info{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.file-preview-icon{
+    font-size:22px;
+    color:var(--primary);
+}
+
+.file-preview-name{
+    font-weight:600;
+    color:var(--text);
+}
+
+.file-preview-size{
+    font-size:.82rem;
+    color:var(--text-light);
+}
+
+.file-remove{
+    color:#ef4444;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.file-remove:hover{
+    transform:scale(1.1);
+}
+
+/* ==========================================================
+   FORM PROGRESS
+========================================================== */
+
+.form-progress{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:20px;
+}
+
+.form-progress-header{
+    display:flex;
+    justify-content:space-between;
+    font-size:.9rem;
+    color:var(--text-light);
+}
+
+.form-progress-bar{
+    width:100%;
+    height:10px;
+    border-radius:999px;
+    overflow:hidden;
+    background:rgba(148,163,184,.18);
+}
+
+.form-progress-fill{
+    width:0;
+    height:100%;
+    border-radius:999px;
+    background:linear-gradient(
+        90deg,
+        var(--primary),
+        #60a5fa
+    );
+    transition:width .35s ease;
+}
+/* ==========================================================
+   FORM MESSAGES
+========================================================== */
+
+.form-message{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+
+    padding:16px 18px;
+
+    border-radius:12px;
+
+    margin-bottom:20px;
+}
+
+.form-message i{
+    font-size:18px;
+    margin-top:2px;
+}
+
+.form-message.success{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.form-message.error{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.form-message.warning{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.form-message.info{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+/* ==========================================================
+   FORM LOADER
+========================================================== */
+
+.form-loading{
+    position:relative;
+    pointer-events:none;
+    opacity:.7;
+}
+
+.form-loading::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    left:50%;
+
+    width:28px;
+    height:28px;
+
+    margin-top:-14px;
+    margin-left:-14px;
+
+    border:3px solid rgba(148,163,184,.3);
+    border-top-color:var(--primary);
+
+    border-radius:50%;
+
+    animation:formSpinner .8s linear infinite;
+}
+
+@keyframes formSpinner{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+/* ==========================================================
+   HELP TEXT
+========================================================== */
+
+.form-help{
+    font-size:.82rem;
+    color:var(--text-light);
+    line-height:1.5;
+}
+
+/* ==========================================================
+   FORM DIVIDER
+========================================================== */
+
+.form-divider{
+    width:100%;
+    height:1px;
+    margin:28px 0;
+    background:var(--border);
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width:1200px){
+
+    .form-grid-4{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .form-grid-3{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media (max-width:768px){
+
+    .form-grid,
+    .form-grid-3,
+    .form-grid-4{
+        grid-template-columns:1fr;
+    }
+
+    .form-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .form-actions{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .form-actions-left,
+    .form-actions-right{
+        width:100%;
+        margin-right:0;
+    }
+
+    .form-actions-left .btn,
+    .form-actions-right .btn{
+        width:100%;
+    }
+
+    .file-upload-label{
+        min-height:180px;
+        padding:24px;
+    }
+
+}
+
+@media (max-width:576px){
+
+    .form-card{
+        padding:18px;
+    }
+
+    .file-preview-item{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+    }
+
+    .file-remove{
+        align-self:flex-end;
+    }
+
+}
+
+/* ==========================================================
+   UTILITIES
+========================================================== */
+
+.form-hidden{
+    display:none !important;
+}
+
+.form-disabled{
+    opacity:.6;
+    pointer-events:none;
+}
+
+.readonly{
+    background:var(--surface-light);
+}
+
+.required-mark{
+    color:#ef4444;
+}
+
+.field-error{
+    border-color:#ef4444 !important;
+}
+
+.field-success{
+    border-color:#22c55e !important;
+}
+
+/* ==========================================================
+   END OF FORMS MODULE
+========================================================== */

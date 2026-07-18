@@ -1,0 +1,362 @@
+/* ==========================================================
+   NimbusCloud
+   Responsive Module
+========================================================== */
+
+/* ==========================================================
+   LARGE LAPTOPS
+========================================================== */
+
+@media (max-width:1400px){
+
+    .container,
+    .app-container{
+        max-width:100%;
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1.8fr 1fr;
+    }
+
+    .stats-grid{
+        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    }
+
+}
+
+/* ==========================================================
+   LAPTOP
+========================================================== */
+
+@media (max-width:1200px){
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard-sidebar{
+        display:none;
+    }
+
+    .form-grid-4{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .form-grid-3{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .comparison-container{
+        grid-template-columns:1fr;
+    }
+
+    .comparison-divider{
+        display:none;
+    }
+
+}
+/* ==========================================================
+   TABLETS
+========================================================== */
+
+@media (max-width:992px){
+
+    /* ---------- Header ---------- */
+
+    .header,
+    .dashboard-header{
+        flex-wrap:wrap;
+        gap:16px;
+    }
+
+    .header-actions,
+    .dashboard-actions{
+        width:100%;
+        justify-content:flex-start;
+        flex-wrap:wrap;
+    }
+
+    /* ---------- Toolbar ---------- */
+
+    .table-toolbar{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .table-toolbar-left,
+    .table-toolbar-right{
+        width:100%;
+    }
+
+    .table-search{
+        width:100%;
+        max-width:none;
+    }
+
+    .table-filter-group{
+        width:100%;
+        flex-wrap:wrap;
+    }
+
+    .table-filter-group > *{
+        flex:1;
+        min-width:180px;
+    }
+
+    /* ---------- Forms ---------- */
+
+    .form-grid,
+    .form-grid-3,
+    .form-grid-4{
+        grid-template-columns:1fr;
+    }
+
+    .form-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    /* ---------- Cards ---------- */
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .dashboard-column{
+        gap:20px;
+    }
+
+    .quick-actions{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    /* ---------- Tables ---------- */
+
+    .data-table{
+        min-width:850px;
+    }
+
+    /* ---------- Review ---------- */
+
+    .review-layout{
+        grid-template-columns:1fr;
+    }
+
+    .review-list{
+        max-height:350px;
+    }
+
+}
+/* ==========================================================
+   MOBILE DEVICES
+========================================================== */
+
+@media (max-width:768px){
+
+    /* ---------- Layout ---------- */
+
+    .app-container,
+    .main-content,
+    .content-wrapper{
+        padding:16px;
+    }
+
+    .dashboard-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .dashboard-actions{
+        width:100%;
+    }
+
+    .dashboard-actions .btn{
+        width:100%;
+    }
+
+    /* ---------- Cards ---------- */
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stat-card{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:14px;
+    }
+
+    .quick-actions{
+        grid-template-columns:1fr;
+    }
+
+    /* ---------- Forms ---------- */
+
+    .form-actions{
+        flex-direction:column;
+    }
+
+    .form-actions .btn{
+        width:100%;
+    }
+
+    /* ---------- Upload ---------- */
+
+    .upload-zone,
+    .file-upload-label{
+        min-height:180px;
+        padding:24px;
+    }
+
+    .upload-icon,
+    .file-upload-icon{
+        font-size:48px;
+    }
+
+    /* ---------- Tables ---------- */
+
+    .data-table{
+        min-width:700px;
+    }
+
+    .pagination{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .pagination-controls{
+        flex-wrap:wrap;
+    }
+
+    .table-footer{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+}
+
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media (max-width:576px){
+
+    .card,
+    .form-card,
+    .summary-card,
+    .chart-card{
+        padding:16px;
+    }
+
+    .dashboard-title h1{
+        font-size:1.45rem;
+    }
+
+    .dashboard-title p{
+        font-size:.9rem;
+    }
+
+    .table-toolbar,
+    .dashboard-toolbar{
+        padding:16px;
+    }
+
+    .table-search{
+        width:100%;
+    }
+
+    .table-action-btn{
+        width:34px;
+        height:34px;
+    }
+
+    .page-btn{
+        width:36px;
+        min-width:36px;
+        height:36px;
+    }
+
+    .activity-item{
+        flex-direction:column;
+    }
+
+    .review-card{
+        padding:14px;
+    }
+
+    .comparison-box{
+        padding:14px;
+    }
+
+}
+
+/* ==========================================================
+   ACCESSIBILITY
+========================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition:none !important;
+        scroll-behavior:auto !important;
+
+    }
+
+}
+
+/* ==========================================================
+   PRINT
+========================================================== */
+
+@media print{
+
+    .sidebar,
+    .header,
+    .dashboard-actions,
+    .table-toolbar,
+    .pagination,
+    .form-actions,
+    .quick-actions,
+    .btn{
+
+        display:none !important;
+
+    }
+
+    body{
+
+        background:#fff;
+
+    }
+
+    .card,
+    .summary-card,
+    .chart-card,
+    .form-card,
+    .table-container{
+
+        box-shadow:none;
+        border:1px solid #ccc;
+
+    }
+
+    .data-table{
+
+        min-width:100%;
+
+    }
+
+}
+
+/* ==========================================================
+   END OF RESPONSIVE MODULE
+========================================================== */

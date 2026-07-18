@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CloudBot — NimbusCloud Suite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Top navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="brand-logo">
+        <span class="logo-icon">&#9729;</span>
+        <span class="brand-name">NimbusCloud</span>
+        <span class="brand-tag">Suite</span>
+      </div>
+    </div>
+    <div class="nav-right">
+      <span class="nav-module">CloudBot v1.0</span>
+      <span class="status-pill" id="statusPill">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">Connecting...</span>
+      </span>
+    </div>
+  </nav>
+
+  <!-- Main layout -->
+  <div class="app-layout">
+
+    <!-- Left sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <p class="sidebar-label">Quick Topics</p>
+        <div class="chip-grid">
+          <button class="chip" onclick="sendQuick('What is cloud computing?')">Cloud basics</button>
+          <button class="chip" onclick="sendQuick('Explain AWS vs Azure vs GCP differences')">AWS vs Azure vs GCP</button>
+          <button class="chip" onclick="sendQuick('What is Docker and how does it work?')">Docker</button>
+          <button class="chip" onclick="sendQuick('What is Kubernetes and when should I use it?')">Kubernetes</button>
+          <button class="chip" onclick="sendQuick('Explain serverless computing with examples')">Serverless</button>
+          <button class="chip" onclick="sendQuick('What is a VPC in cloud networking?')">VPC & Networking</button>
+          <button class="chip" onclick="sendQuick('What is CI/CD and how do I set it up?')">CI/CD Pipeline</button>
+          <button class="chip" onclick="sendQuick('Explain cloud storage types: object, block, file')">Cloud Storage</button>
+          <button class="chip" onclick="sendQuick('What is load balancing in cloud?')">Load Balancing</button>
+          <button class="chip" onclick="sendQuick('Explain microservices architecture')">Microservices</button>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <p class="sidebar-label">Session</p>
+        <button class="btn-clear" onclick="clearChat()">
+          &#10227; Clear conversation
+        </button>
+      </div>
+
+      <div class="sidebar-footer">
+        <p>Built for CodeAlpha</p>
+        <p>Cloud Computing Internship</p>
+      </div>
+    </aside>
+
+    <!-- Chat area -->
+    <main class="chat-area">
+
+      <!-- Chat header -->
+      <div class="chat-header">
+        <div class="bot-avatar">C</div>
+        <div class="bot-info">
+          <p class="bot-name">CloudBot</p>
+          <p class="bot-desc">Cloud Computing &amp; Tech Expert</p>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" title="Export chat" onclick="exportChat()">&#8659;</button>
+        </div>
+      </div>
+
+      <!-- Messages container -->
+      <div class="messages-wrap" id="messagesWrap">
+
+        <!-- Welcome card -->
+        <div class="welcome-card">
+          <div class="welcome-icon">&#9729;</div>
+          <h2>Welcome to CloudBot</h2>
+          <p>Your expert guide to cloud computing, DevOps, and modern infrastructure. Ask me anything about AWS, Azure, GCP, Docker, Kubernetes, and more.</p>
+          <div class="welcome-chips">
+            <span onclick="sendQuick('What can you help me with?')">What can you help me with?</span>
+            <span onclick="sendQuick('Explain cloud computing to a beginner')">Explain cloud computing</span>
+            <span onclick="sendQuick('How do I start learning AWS?')">How to learn AWS?</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Typing indicator (hidden by default) -->
+      <div class="typing-bar" id="typingBar" style="display:none">
+        <div class="typing-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <p>CloudBot is thinking...</p>
+      </div>
+
+      <!-- Input area -->
+      <div class="input-area">
+        <div class="input-box">
+          <textarea
+            id="userInput"
+            placeholder="Ask about AWS, Docker, Kubernetes, cloud architecture..."
+            rows="1"
+            onkeydown="handleKey(event)"
+            oninput="autoResize(this)"
+          ></textarea>
+          <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+        <p class="input-hint">Press Enter to send &nbsp;·&nbsp; Shift+Enter for new line</p>
+      </div>
+
+    </main>
+
+    <!-- Right info panel -->
+    <aside class="info-panel">
+      <div class="info-section">
+        <p class="sidebar-label">About this bot</p>
+        <div class="info-card">
+          <div class="info-row">
+            <span class="info-icon">&#128200;</span>
+            <div>
+              <p class="info-title">Powered by Gemini</p>
+              <p class="info-sub">Google Gemini 1.5 Flash</p>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">&#128274;</span>
+            <div>
+              <p class="info-title">Context memory</p>
+              <p class="info-sub">Remembers full conversation</p>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">&#9729;</span>
+            <div>
+              <p class="info-title">Specialization</p>
+              <p class="info-sub">Cloud, DevOps, Infrastructure</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <p class="sidebar-label">Stats</p>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <p class="stat-num" id="statMsgs">0</p>
+            <p class="stat-label">Messages</p>
+          </div>
+          <div class="stat-box">
+            <p class="stat-num" id="statQueries">0</p>
+            <p class="stat-label">Queries sent</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <p class="sidebar-label">Topics covered</p>
+        <div class="coverage-list" id="coverageList">
+          <span class="coverage-tag">Waiting for questions...</span>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
